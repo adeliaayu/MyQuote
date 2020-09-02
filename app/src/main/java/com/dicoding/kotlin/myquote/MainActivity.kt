@@ -1,5 +1,6 @@
 package com.dicoding.kotlin.myquote
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         getRandomQuote()
+
+        btnAllQuotes.setOnClickListener {
+            startActivity(Intent(this@MainActivity, ListQuotesActivity::class.java))
+        }
     }
 
     private fun getRandomQuote() {
@@ -57,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                 responseBody: ByteArray,
                 error: Throwable
             ) {
-                progressBar.visibility = View.VISIBLE
+                progressBar.visibility = View.INVISIBLE
 
                 val errorMessage = when (statusCode) {
                     401 -> "$statusCode : Bad Request"
